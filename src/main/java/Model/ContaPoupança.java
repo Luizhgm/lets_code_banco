@@ -40,4 +40,13 @@ public class ContaPoupança extends Conta{
         double taxa = (1+(MacroEconomia.getInstance().getCDI()+2)/12/100);
         this.setSaldo(this.getSaldo()*taxa);
     }
+
+    @Override
+    public String printContaDetalhada() {
+        return "Conta do tipo: "+this.getTipoConta()+ "\n"+
+                this.getCliente().printCliente()+
+                "Conta de numero: "+this.getNumero()+ "\n"+
+                "Agencia numero: "+this.getAgencia()+ "\n"+
+                "Saldo: "+this.getSaldo();
+    }
 }

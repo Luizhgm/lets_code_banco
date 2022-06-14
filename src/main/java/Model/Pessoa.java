@@ -13,10 +13,11 @@ public abstract class Pessoa {
 
     protected Pessoa(TipoPessoa tipo) {
         if (tipo == TipoPessoa.PESSOA_FISICA) {
-            this.CodigoPessoa = "0" + String.format("%05d", UUID.randomUUID().toString());
+
+            this.CodigoPessoa = "0" + UUID.randomUUID().toString();
         }
         else{
-            this.CodigoPessoa = "1" + String.format("%05d", UUID.randomUUID().toString());
+            this.CodigoPessoa = "1" + UUID.randomUUID().toString();
         }
         this.tipo = tipo;
     }

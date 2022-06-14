@@ -112,8 +112,8 @@ public class ServicoCliente {
             if (!pessoa.getPessoa().equals(tipo)){
                 // Caso o tipo de pessoa seja diferente do tipo da lista
             }
-            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) & ((PessoaJuridica) pessoa).getCNPJ().equals(identificador)) |
-                    (TipoPessoa.PESSOA_FISICA.equals(tipo) & ((PessoaFisica) pessoa).getCPF().equals(identificador))) {
+            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) && ((PessoaJuridica) pessoa).getCNPJ().equals(identificador)) ||
+                    (TipoPessoa.PESSOA_FISICA.equals(tipo) && ((PessoaFisica) pessoa).getCPF().equals(identificador))) {
                     System.out.println(pessoa.printPessoa());
                     return pessoa;
             }
@@ -127,8 +127,8 @@ public class ServicoCliente {
             if (!cliente.pessoa.getPessoa().equals(tipo)){
                 // Caso o tipo de pessoa seja diferente do tipo da lista
             }
-            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) & ((PessoaJuridica) cliente.pessoa).getCNPJ().equals(identificador)) |
-                    (TipoPessoa.PESSOA_FISICA.equals(tipo) & ((PessoaFisica) cliente.pessoa).getCPF().equals(identificador))) {
+            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) && ((PessoaJuridica) cliente.pessoa).getCNPJ().equals(identificador)) ||
+                    (TipoPessoa.PESSOA_FISICA.equals(tipo) && ((PessoaFisica) cliente.pessoa).getCPF().equals(identificador))) {
                 System.out.println(cliente.printCliente());
                 return cliente;
             }

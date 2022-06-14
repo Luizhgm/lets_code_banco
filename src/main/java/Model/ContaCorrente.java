@@ -54,5 +54,15 @@ public class ContaCorrente extends Conta{
         this.setSaldo(this.getSaldo()*taxa);
     }
 
+    @Override
+    public String printContaDetalhada() {
+        return "Conta do tipo: "+this.getTipoConta()+ "\n"+
+                this.getCliente().printCliente()+
+                "Conta de numero: "+this.getNumero()+ "\n"+
+                "Agencia numero: "+this.getAgencia()+ "\n"+
+                "Limite: "+this.limite+ "\n"+
+                "Saldo: "+this.getSaldo();
+    }
+
 
 }

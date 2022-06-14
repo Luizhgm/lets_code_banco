@@ -57,6 +57,34 @@ public class ServicoConta {
 
     };
 
+    public void ListarContaCorrente(){
+        Stream<Conta> cliente = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_CORRENTE));
+
+        // no futuro sorted no cliente;
+
+        cliente.forEach(x->System.out.println(x.printContaDetalhada()));
+
+    };
+
+    public void ListarContaPoupanca(){
+        Stream<Conta> cliente = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_POUPANCA));
+
+        // no futuro sorted no cliente;
+
+        cliente.forEach(x->System.out.println(x.printContaDetalhada()));
+
+    };
+
+    public void ListarContaInvestimento(){
+        Stream<Conta> cliente = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_INVESTIMENTO));
+
+        // no futuro sorted no cliente;
+
+        cliente.forEach(x->System.out.println(x.printContaDetalhada()));
+
+    };
+
+
     public Conta ConsultarConta(String numero, String Agencia) throws Exception {
         Iterator<Conta> conta = contas.values().stream().filter(x->((x.getAgencia().equals(Agencia)) & (x.getNumero().equals(numero)))).iterator();
 
@@ -91,5 +119,13 @@ public class ServicoConta {
             ((ContaCorrente) conta).remuneracao();
         }
     }
+
+    public void Depositar(Conta conta, double valor){
+        conta.deposito(valor);
+    }
+    public void Sacar(Conta conta, double valor) throws Exception { conta.saque(valor); }
+    public void Transferir(Conta conta, Conta contaAuxiliar, double valor) throws Exception { conta.transferencia(contaAuxiliar, valor); }
+
+
 
 }

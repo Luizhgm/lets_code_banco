@@ -9,7 +9,7 @@ public class Cliente {
 
 
     public Cliente(Pessoa pessoa) {
-        this.CodigoCliente = "8" + String.format("%05d", UUID.randomUUID().toString());
+        this.CodigoCliente = "8" + UUID.randomUUID().toString();
         this.pessoa = pessoa;
     }
 

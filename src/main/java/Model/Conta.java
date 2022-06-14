@@ -7,11 +7,11 @@ import java.util.UUID;
 public abstract class Conta {
 
 
-    final String CodigoConta;
-    final String numero;
+    final private String CodigoConta;
+    final private String numero;
     private Agencia agencia;
     private Cliente cliente;
-    final TipoConta tipoConta;
+    final private TipoConta tipoConta;
 
 
     private double saldo=0.0;
@@ -28,12 +28,14 @@ public abstract class Conta {
 
     public Conta(Agencia agencia, Cliente cliente, TipoConta tipoConta) {
         this.tipoConta = tipoConta;
-        this.CodigoConta = "8" + String.format("%05d", UUID.randomUUID().toString());
-        this.numero = "8" + String.format("%05d", UUID.randomUUID().toString());
+        this.CodigoConta = "8" + UUID.randomUUID().toString();
+        this.numero = "8" + UUID.randomUUID().toString();
         this.agencia = agencia;
         this.cliente = cliente;
 
     }
+
+    public Cliente getCliente(){return this.cliente;}
 
     public String printConta(){
         return "Conta do tipo: "+this.tipoConta+ "\n"+
@@ -75,6 +77,7 @@ public abstract class Conta {
     public abstract void saque(double Valor) throws Exception;
     public abstract void deposito(double Valor);
     public abstract void remuneracao();
+    public abstract String printContaDetalhada();
 
 
 }
