@@ -7,6 +7,7 @@ import java.util.UUID;
 public abstract class Conta {
 
 
+    private static Integer count = 1 ;
     final private String CodigoConta;
     final private String numero;
     private Agencia agencia;
@@ -29,9 +30,10 @@ public abstract class Conta {
     public Conta(Agencia agencia, Cliente cliente, TipoConta tipoConta) {
         this.tipoConta = tipoConta;
         this.CodigoConta = "8" + UUID.randomUUID().toString();
-        this.numero = "8" + UUID.randomUUID().toString();
+        this.numero = String.format("8%05d", count) ;
         this.agencia = agencia;
         this.cliente = cliente;
+        count++;
 
     }
 
@@ -40,7 +42,7 @@ public abstract class Conta {
     public String printConta(){
         return "Conta do tipo: "+this.tipoConta+ "\n"+
                 "Conta de numero: "+this.numero+ "\n"+
-                "Agencia numero: "+this.agencia+ "\n"+
+                "Agencia numero: "+this.agencia.getNumero()+ "\n"+
                 this.cliente.printCliente();
     }
 

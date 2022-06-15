@@ -3,11 +3,15 @@ package presentation.frames.contas;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+import Model.Agencia;
+import Model.Conta;
+import Servicos.ServicoCliente;
+import Servicos.ServicoConta;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
 public class Depositar extends Frame {
-    private BigDecimal valor;
+    private double valor;
 
     public Depositar(String key, Navigator navigator, HashMap<String, Object> params) {
         super(key, navigator, params);
@@ -17,10 +21,12 @@ public class Depositar extends Frame {
     public void render() {
         printFrameTitle("DEPOSITAR");
         System.out.print("Digite o valor a ser depositado: ");
-        valor = scanner.nextBigDecimal();
+        valor = scanner.nextDouble();
         scanner.nextLine();
 
-        // TODO: implementar o lógica de depósito
+        ServicoConta servicoConta = ServicoConta.getInstance();
+
+        servicoConta.Depositar(((Conta)this.params.get("conta")), valor);
 
         System.out.println("Depósito realizado com sucesso!");
         System.out.println("Aperte ENTER para continuar...");

@@ -2,6 +2,10 @@ package presentation.frames.contas;
 
 import java.util.HashMap;
 
+import Model.Agencia;
+import Model.Conta;
+import Servicos.ServicoCliente;
+import Servicos.ServicoConta;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
@@ -13,24 +17,21 @@ public class AcessarConta extends Frame {
     }
 
     @Override
-    public void render() {
+    public void render() throws Exception {
         printFrameTitle("ACESSAR CONTA");
         System.out.print("Digite o código da conta (deixe vazio para voltar): ");
-
         codigoConta = this.scanner.nextLine();
 
         if (codigoConta.isEmpty()) {
             this.navigator.goBack();
             return;
         }
+        ServicoConta servicoConta = ServicoConta.getInstance();
+        ServicoCliente servicoCliente = ServicoCliente.getInstance();
+        Agencia agencia = servicoConta.getInstanceAgencia();
 
-        // TODO: implementar o lógica de acesso à conta
+        Conta conta=servicoConta.ConsultarConta(codigoConta, agencia.getNumero());
 
-        // Conta de teste
-        Cliente cliente = new PessoaFisica("fulano", "123.456.789-00");
-        ContaCorrente conta = new ContaCorrente(cliente);
-
-        // cria hash map para armazenar parametros de um frame
         HashMap<String, Object> params = new HashMap<>();
         params.put("conta", conta);
 

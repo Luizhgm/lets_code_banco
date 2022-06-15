@@ -82,7 +82,7 @@ public class ContaInvestimento extends Conta {
         return "Conta do tipo: "+this.getTipoConta()+ "\n"+
                 this.getCliente().printCliente()+
                 "Conta de numero: "+this.getNumero()+ "\n"+
-                "Agencia numero: "+this.getAgencia()+ "\n"+
+                "Agencia numero: "+this.getAgencia().getNumero()+ "\n"+
                 "Saldo: "+this.getSaldo()+ "\n"+
                 "Valor investido: "+ this.valorInvestido;
     }
