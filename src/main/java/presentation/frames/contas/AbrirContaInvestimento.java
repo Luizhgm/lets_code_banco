@@ -1,5 +1,10 @@
 package presentation.frames.contas;
 
+import Enums.TipoConta;
+import Enums.TipoPessoa;
+import Model.Agencia;
+import Servicos.ServicoCliente;
+import Servicos.ServicoConta;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
@@ -9,10 +14,42 @@ public class AbrirContaInvestimento extends Frame {
     }
 
     @Override
-    public void render() {
+    public void render() throws Exception {
         printFrameTitle("ABRIR CONTA INVESTIMENTO");
-        
-        // TODO: implementar abertura de conta investimento
+
+
+        System.out.println();
+
+        System.out.println("1. Abrir conta investimento PF");
+        System.out.println("2. Abrir conta investimento PJ");
+
+        System.out.print("Digite a opção desejada: ");
+
+        int option = scanner.nextInt();
+        this.scanner.nextLine();
+
+
+        ServicoConta servicoConta = ServicoConta.getInstance();
+        ServicoCliente servicoCliente = ServicoCliente.getInstance();
+        Agencia agencia = servicoConta.getInstanceAgencia();
+
+        switch (option) {
+            case 1:
+                System.out.print("CPF: ");
+                String cpf = scanner.nextLine();
+                servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
+                        agencia,
+                        servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_FISICA, cpf));
+                break;
+            case 2:
+                System.out.print("CNPJ: ");
+                String cnpj = scanner.nextLine();
+                servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
+                        agencia,
+                        servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_JURIDICA, cnpj));
+                break;
+        }
+
 
         System.out.println("Conta investimento aberta com sucesso!");
         System.out.println("Aperte ENTER para continuar...");

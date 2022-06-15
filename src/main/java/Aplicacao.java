@@ -10,6 +10,8 @@ import presentation.frames.clientes.ListarClientes;
 import presentation.frames.contas.*;
 import presentation.navigation.Navigator;
 
+import java.util.Scanner;
+
 public class Aplicacao {
     public static void main(String[] args) {
 

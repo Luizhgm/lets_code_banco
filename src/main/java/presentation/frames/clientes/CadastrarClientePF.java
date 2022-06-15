@@ -1,5 +1,9 @@
 package presentation.frames.clientes;
 
+import Enums.TipoPessoa;
+import Model.Cliente;
+import Model.Pessoa;
+import Servicos.ServicoCliente;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
@@ -12,7 +16,7 @@ public class CadastrarClientePF extends Frame {
     }
 
     @Override
-    public void render() {
+    public void render() throws Exception {
         printFrameTitle("CADASTRAR CLIENTE PESSOA FÍSICA");
         
         System.out.println();
@@ -21,9 +25,12 @@ public class CadastrarClientePF extends Frame {
         System.out.print("CPF: ");
         cpf = scanner.nextLine();
 
-        // TODO: implementar a criação de um cliente pessoa física
+        ServicoCliente servicoCliente=ServicoCliente.getInstance();
 
-        System.out.println("Cliente cadastrado com sucesso!");
+        Cliente cliente = servicoCliente.CadastrarCliente(servicoCliente.CadastrarPessoa(TipoPessoa.PESSOA_FISICA, nome, cpf));
+
+
+        System.out.println("Pessoa Fisica cadastrada, cliente de codigo "+ cliente.getCodigoCliente()+" cadastrado com sucesso!");
         System.out.println("Aperte ENTER para continuar...");
 
         if(this.scanner.hasNextLine()) {

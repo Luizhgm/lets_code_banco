@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 public class ServicoConta {
     private static ServicoConta  ServicoConta;
+    private static Agencia agencia;
 
     private Map<String, Conta> contas = new HashMap<>();
 
@@ -26,6 +27,12 @@ public class ServicoConta {
         return ServicoConta;
     }
 
+    public static synchronized Agencia getInstanceAgencia() {
+        if (agencia == null)
+            agencia = new Agencia("001", "001");
+
+        return agencia;
+    }
 
 
     public Conta abrirConta(TipoConta tipo, Agencia agencia, Cliente cliente) throws Exception {
@@ -150,7 +157,6 @@ public class ServicoConta {
         }
 
     }
-
 
     public void Sacar(Conta conta, double valor) throws Exception { conta.saque(valor); }
     public void Transferir(Conta conta, Conta contaAuxiliar, double valor) throws Exception { conta.transferencia(contaAuxiliar, valor); }

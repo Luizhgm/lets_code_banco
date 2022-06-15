@@ -1,5 +1,6 @@
 package presentation.frames.clientes;
 
+import Servicos.ServicoCliente;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
@@ -13,7 +14,9 @@ public class ListarClientes extends Frame {
     public void render() {
         printFrameTitle("LISTAR CLIENTES");
 
-        // TODO: implementar a listagem de clientes
+        ServicoCliente servicoCliente=ServicoCliente.getInstance();
+
+        servicoCliente.ListarClientes();
 
         System.out.println("Aperte ENTER para continuar...");
 

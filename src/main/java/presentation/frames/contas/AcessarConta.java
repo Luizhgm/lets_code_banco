@@ -2,9 +2,6 @@ package presentation.frames.contas;
 
 import java.util.HashMap;
 
-import br.bb.Cliente;
-import br.bb.ContaCorrente;
-import br.bb.PessoaFisica;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
