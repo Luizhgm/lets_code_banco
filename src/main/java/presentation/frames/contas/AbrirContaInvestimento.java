@@ -3,6 +3,7 @@ package presentation.frames.contas;
 import Enums.TipoConta;
 import Enums.TipoPessoa;
 import Model.Agencia;
+import Model.Conta;
 import Servicos.ServicoCliente;
 import Servicos.ServicoConta;
 import presentation.navigation.Frame;
@@ -33,25 +34,28 @@ public class AbrirContaInvestimento extends Frame {
         ServicoCliente servicoCliente = ServicoCliente.getInstance();
         Agencia agencia = servicoConta.getInstanceAgencia();
 
+        Conta conta;
         switch (option) {
             case 1:
                 System.out.print("CPF: ");
                 String cpf = scanner.nextLine();
-                servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
+                conta = servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
                         agencia,
                         servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_FISICA, cpf));
                 break;
             case 2:
                 System.out.print("CNPJ: ");
                 String cnpj = scanner.nextLine();
-                servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
+                conta = servicoConta.abrirConta(TipoConta.CONTA_INVESTIMENTO,
                         agencia,
                         servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_JURIDICA, cnpj));
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + option);
         }
 
 
-        System.out.println("Conta investimento aberta com sucesso!");
+        System.out.println("Conta investimento "+ conta.getNumero() +" aberta com sucesso!");
         System.out.println("Aperte ENTER para continuar...");
         
 

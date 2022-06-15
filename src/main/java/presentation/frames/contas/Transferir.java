@@ -20,13 +20,22 @@ public class Transferir extends Frame {
     @Override
     public void render() throws Exception {
         printFrameTitle("TRANSFERIR");
-        
+
+        System.out.println("Digite o código da conta destino (deixe vazio para voltar): ");
+        codigoContaDestino = scanner.nextLine();
+
+        if (codigoContaDestino.isEmpty()) {
+            this.navigator.goBack();
+            return;
+        }
+
         System.out.print("Digite o valor a ser transferido: ");
         valor = scanner.nextDouble();
         scanner.nextLine();
         
-        System.out.println("Digite o código da conta destino: ");
-        codigoContaDestino = scanner.nextLine();
+
+
+
 
         ServicoConta servicoConta = ServicoConta.getInstance();
         Agencia agencia = servicoConta.getInstanceAgencia();

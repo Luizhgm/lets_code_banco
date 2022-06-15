@@ -33,24 +33,27 @@ public class AbrirContaCorrente extends Frame {
         ServicoCliente servicoCliente = ServicoCliente.getInstance();
         Agencia agencia = servicoConta.getInstanceAgencia();
 
+        Conta conta;
         switch (option) {
             case 1:
                 System.out.print("CPF: ");
                 String cpf = scanner.nextLine();
-                servicoConta.abrirConta(TipoConta.CONTA_CORRENTE,
+                conta = servicoConta.abrirConta(TipoConta.CONTA_CORRENTE,
                         agencia,
                         servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_FISICA, cpf));
                 break;
             case 2:
                 System.out.print("CNPJ: ");
                 String cnpj = scanner.nextLine();
-                servicoConta.abrirConta(TipoConta.CONTA_CORRENTE,
+                conta = servicoConta.abrirConta(TipoConta.CONTA_CORRENTE,
                         agencia,
                         servicoCliente.ConsultarCliente(TipoPessoa.PESSOA_JURIDICA, cnpj));
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + option);
         }
 
-        System.out.println("Conta corrente aberta com sucesso!");
+        System.out.println("Conta corrente "+ conta.getNumero() +" aberta com sucesso!");
         System.out.println("Aperte ENTER para continuar...");
 
         if(this.scanner.hasNextLine()) {

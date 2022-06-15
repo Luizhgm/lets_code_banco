@@ -1,5 +1,6 @@
 package presentation.frames.contas;
 
+import Servicos.ServicoConta;
 import presentation.navigation.Frame;
 import presentation.navigation.Navigator;
 
@@ -12,8 +13,9 @@ public class ListarContas extends Frame {
     @Override
     public void render() {
         printFrameTitle("LISTAR CONTAS");
-        
-        // TODO: implementar a listagem de contas
+
+        ServicoConta servicoConta = ServicoConta.getInstance();
+        servicoConta.ListarContas();
 
         System.out.println("Aperte ENTER para continuar...");
 

@@ -17,10 +17,9 @@ public class DetalhesConta extends Frame {
         printFrameTitle("DETALHES DA CONTA");
         
         Conta conta = (Conta) this.params.get("conta");
-        System.out.println("Codigo da agencia: "+ conta.getAgencia().getNumero());
-        System.out.println("Codigo da conta: "+ conta.getNumero());
-        System.out.println("Tipo de conta: "+ conta.getTipoConta());
-        System.out.println("Nome do cliente: " + conta.getCliente().getPessoa().getPessoa());
+
+        System.out.println(conta.printContaDetalhada());
+
         System.out.println();
 
         System.out.println("1. Saque");
@@ -28,7 +27,8 @@ public class DetalhesConta extends Frame {
         System.out.println("3. Transferência");
         System.out.println("4. Investir");
         System.out.println("5. Desinvestir");
-        System.out.println("6. Voltar");
+        System.out.println("6. Desinvestir");
+        System.out.println("7. Voltar");
 
         System.out.println();
         System.out.print("Digite a opção desejada: ");
@@ -46,7 +46,16 @@ public class DetalhesConta extends Frame {
             case 3:
                 this.navigator.navigate("transferir", this.params);
                 break;
+            case 4:
+                this.navigator.navigate("investimento", this.params);
+                break;
+            case 5:
+                this.navigator.navigate("desinvestimento", this.params);
+                break;
             case 6:
+                this.navigator.navigate("mudarlimite", this.params);
+                break;
+            case 7:
                 this.navigator.goBack();
                 break;
             default:

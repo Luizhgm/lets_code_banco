@@ -87,8 +87,9 @@ public class Navigator {
             clearFrame();
             System.out.println("\n\n" + e.getMessage());
             System.out.println("Pressione Enter para continuar...");
-            
+
             Scanner scanner = new Scanner(System.in);
+
             if(scanner.hasNextLine()) {
                 scanner.nextLine();
             }

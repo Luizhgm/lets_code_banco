@@ -32,7 +32,10 @@ public class Aplicacao {
         navigator.addFrame("transferir", Transferir.class);
         navigator.addFrame("sacar", Sacar.class);
         navigator.addFrame("depositar", Depositar.class);
-        navigator.addFrame("investir", Investir.class);
+        navigator.addFrame("investimento", Investimento.class);
+        navigator.addFrame("desinvestimento", Desinvestimento.class);
+        navigator.addFrame("mudarlimite", Limite.class);
+
         navigator.init("home");
         while(!navigator.isEmpty()) {
             navigator.renderCurrentFrame();
