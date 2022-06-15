@@ -87,7 +87,7 @@ public class ServicoCliente {
     };
 
     public void ListarClientesFisicos(){
-        Stream<Cliente> cliente = Clientes.values().stream().filter(x->x.pessoa.getPessoa().equals(TipoPessoa.PESSOA_FISICA));
+        Stream<Cliente> cliente = Clientes.values().stream().filter(x->x.getPessoa().getPessoa().equals(TipoPessoa.PESSOA_FISICA));
 
         // no futuro sorted no cliente;
 
@@ -96,7 +96,7 @@ public class ServicoCliente {
     };
 
     public void ListarClientesJuridica(){
-        Stream<Cliente> cliente = Clientes.values().stream().filter(x->x.pessoa.getPessoa().equals(TipoPessoa.PESSOA_JURIDICA));
+        Stream<Cliente> cliente = Clientes.values().stream().filter(x->x.getPessoa().getPessoa().equals(TipoPessoa.PESSOA_JURIDICA));
 
         // no futuro sorted no cliente;
 
@@ -124,11 +124,11 @@ public class ServicoCliente {
     public Cliente ConsultarCliente(TipoPessoa tipo, String identificador) throws Exception {
         for (Cliente cliente: Clientes.values()) {
 
-            if (!cliente.pessoa.getPessoa().equals(tipo)){
+            if (!cliente.getPessoa().getPessoa().equals(tipo)){
                 // Caso o tipo de pessoa seja diferente do tipo da lista
             }
-            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) && ((PessoaJuridica) cliente.pessoa).getCNPJ().equals(identificador)) ||
-                    (TipoPessoa.PESSOA_FISICA.equals(tipo) && ((PessoaFisica) cliente.pessoa).getCPF().equals(identificador))) {
+            else if ((TipoPessoa.PESSOA_JURIDICA.equals(tipo) && ((PessoaJuridica) cliente.getPessoa()).getCNPJ().equals(identificador)) ||
+                    (TipoPessoa.PESSOA_FISICA.equals(tipo) && ((PessoaFisica) cliente.getPessoa()).getCPF().equals(identificador))) {
                 System.out.println(cliente.printCliente());
                 return cliente;
             }

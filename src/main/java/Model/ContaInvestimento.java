@@ -1,6 +1,7 @@
 package Model;
 
 import Enums.TipoConta;
+import Enums.TipoPessoa;
 
 public class ContaInvestimento extends Conta {
     private double valorInvestido=0;
@@ -50,7 +51,12 @@ public class ContaInvestimento extends Conta {
     @Override
     public void remuneracao() {
         //CDI+2 em porcentagem (/100) e diario (/365)
-        double taxa = (1+(MacroEconomia.getInstance().getCDI()+2)/365/100);
+        double taxa = Math.max(MacroEconomia.getInstance().getCDI(), MacroEconomia.getInstance().getIPCA());
+        if (this.getCliente().getPessoa().getPessoa().equals(TipoPessoa.PESSOA_JURIDICA)){
+            taxa+=2;
+        }
+        taxa=(1+(taxa)/100/365);
+
         this.setValorInvestido(this.getValorInvestido()*taxa);
     }
 
@@ -62,6 +68,14 @@ public class ContaInvestimento extends Conta {
         this.setValorInvestido(this.getValorInvestido()+Valor);
 
     }
+    public void desinvestir(double Valor) throws Exception {
+        if (this.getValorInvestido()<Valor){
+            throw new Exception("Saldo investido insuficiente");
+        }
+        this.setSaldo(this.getSaldo()+Valor);
+        this.setValorInvestido(this.getValorInvestido()-Valor);
+
+    }
 
     @Override
     public String printContaDetalhada() {
@@ -69,7 +83,8 @@ public class ContaInvestimento extends Conta {
                 this.getCliente().printCliente()+
                 "Conta de numero: "+this.getNumero()+ "\n"+
                 "Agencia numero: "+this.getAgencia()+ "\n"+
-                "Saldo: "+this.getSaldo();
+                "Saldo: "+this.getSaldo()+ "\n"+
+                "Valor investido: "+ this.valorInvestido;
     }
 
 }

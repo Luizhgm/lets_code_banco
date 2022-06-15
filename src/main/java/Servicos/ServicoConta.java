@@ -35,7 +35,7 @@ public class ServicoConta {
             return conta;
         }
         else if (TipoConta.CONTA_POUPANCA.equals(tipo) &
-                TipoPessoa.PESSOA_FISICA.equals(cliente.pessoa.tipo)){
+                TipoPessoa.PESSOA_FISICA.equals(cliente.getPessoa().tipo)){
             ContaPoupança conta = new ContaPoupança(agencia, cliente);
             contas.put(conta.getCodigoConta(), conta);
             return conta;
@@ -45,7 +45,7 @@ public class ServicoConta {
             contas.put(conta.getCodigoConta(), conta);
             return conta;
         }
-        throw new Exception("Exception message");
+        throw new Exception("Não pode abrir conta");
     }
 
     public void ListarContas(){
@@ -86,7 +86,7 @@ public class ServicoConta {
 
 
     public Conta ConsultarConta(String numero, String Agencia) throws Exception {
-        Iterator<Conta> conta = contas.values().stream().filter(x->((x.getAgencia().equals(Agencia)) & (x.getNumero().equals(numero)))).iterator();
+        Iterator<Conta> conta = contas.values().stream().filter(x->((x.getAgencia().getNumero().equals(Agencia)) & (x.getNumero().equals(numero)))).iterator();
 
         if (conta.hasNext()){
             Conta ContaAuxiliar = conta.next();
@@ -102,27 +102,56 @@ public class ServicoConta {
     public void RenderContasInvestimento(){
         Iterator<Conta> conta = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_INVESTIMENTO)).iterator();
         while (conta.hasNext()){
-            ((ContaInvestimento) conta).remuneracao();
+            ((ContaInvestimento) conta.next()).remuneracao();
         }
     }
 
     public void RenderContasPoupanca(){
         Iterator<Conta> conta = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_POUPANCA)).iterator();
         while (conta.hasNext()){
-            ((ContaPoupança) conta).remuneracao();
+            ((ContaPoupança) conta.next()).remuneracao();
         }
     }
 
     public void RenderContasCorrentes(){
         Iterator<Conta> conta = contas.values().stream().filter(x->x.getTipoConta().equals(TipoConta.CONTA_CORRENTE)).iterator();
         while (conta.hasNext()){
-            ((ContaCorrente) conta).remuneracao();
+            ((ContaCorrente) conta.next()).remuneracao();
         }
     }
 
     public void Depositar(Conta conta, double valor){
         conta.deposito(valor);
     }
+
+    public void MudarLimite(Conta conta, double valor) throws Exception {
+        if (conta.getTipoConta().equals(TipoConta.CONTA_CORRENTE)){
+            ((ContaCorrente) conta).setLimite(valor);
+        }else{
+            System.out.println("Não pode da limite para conta sem ser investimento");
+        }
+
+    }
+
+    public void Investir(Conta conta, double valor) throws Exception {
+        if (conta.getTipoConta().equals(TipoConta.CONTA_INVESTIMENTO)){
+            ((ContaInvestimento) conta).investir(valor);
+        }else{
+            System.out.println("Não pode investir em conta diferente de investimento");
+        }
+
+    }
+
+    public void Desinvestir(Conta conta, double valor) throws Exception {
+        if (conta.getTipoConta().equals(TipoConta.CONTA_INVESTIMENTO)){
+            ((ContaInvestimento) conta).desinvestir(valor);
+        }else{
+            System.out.println("Não pode Desinvestir em conta diferente de investimento");
+        }
+
+    }
+
+
     public void Sacar(Conta conta, double valor) throws Exception { conta.saque(valor); }
     public void Transferir(Conta conta, Conta contaAuxiliar, double valor) throws Exception { conta.transferencia(contaAuxiliar, valor); }
 

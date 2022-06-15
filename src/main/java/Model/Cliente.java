@@ -3,8 +3,8 @@ package Model;
 import java.util.UUID;
 
 public class Cliente {
-    final String CodigoCliente;
-    public Pessoa pessoa;
+    final private String CodigoCliente;
+    private Pessoa pessoa;
 
 
 
@@ -13,6 +13,9 @@ public class Cliente {
         this.pessoa = pessoa;
     }
 
+    public Pessoa getPessoa(){
+        return this.pessoa;
+    }
     public String printCliente() {
         return "Cliente \n"+
                 this.pessoa.printPessoa();

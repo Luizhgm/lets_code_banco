@@ -37,7 +37,7 @@ public class ContaPoupança extends Conta{
     @Override
     public void remuneracao() {
         //CDI em porcentagem (/100) e mês (/12)
-        double taxa = (1+(MacroEconomia.getInstance().getCDI()+2)/12/100);
+        double taxa = (1+Math.min(MacroEconomia.getInstance().getCDI(), MacroEconomia.getInstance().getIPCA())/12/100);
         this.setSaldo(this.getSaldo()*taxa);
     }
 
